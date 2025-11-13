@@ -27,23 +27,6 @@ jobs:
     - name: Run tests
       run: mvn test -B
 
-    - name: Generate test report
-      if: always()
-      uses: dorny/test-reporter@v1
-      with:
-        name: Maven Tests
-        path: '**/target/surefire-reports/TEST-*.xml'
-        reporter: java-junit
-        fail-on-error: true
-
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: '**/target/surefire-reports/'
-        retention-days: 30
-
     - name: Check code coverage
       run: mvn verify
 
