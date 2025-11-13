@@ -1,0 +1,54 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: ./mvnw clean install -B -V
+
+    - name: Run tests
+      run: ./mvnw test -B
+
+    - name: Generate test report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: Maven Tests
+        path: '**/target/surefire-reports/TEST-*.xml'
+        reporter: java-junit
+        fail-on-error: true
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: '**/target/surefire-reports/'
+        retention-days: 30
+
+    - name: Check code coverage
+      run: ./mvnw verify
+
+    - name: Build Docker image (optional)
+      if: github.ref == 'refs/heads/main'
+      run: |
+        cd container
+        docker build -t reservation-service:${{ github.sha }} .
