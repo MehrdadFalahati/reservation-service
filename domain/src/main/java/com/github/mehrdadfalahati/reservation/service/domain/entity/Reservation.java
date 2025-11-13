@@ -34,6 +34,14 @@ public class Reservation {
     @Builder.Default
     private final List<DomainEvent> domainEvents = new ArrayList<>();
 
+    public static Reservation create(
+            UserId userId,
+            AvailableSlotId availableSlotId,
+            Instant reservedAt
+    ) {
+       return create(null, userId, availableSlotId, reservedAt);
+    }
+
 
     public static Reservation create(
             ReservationId id,

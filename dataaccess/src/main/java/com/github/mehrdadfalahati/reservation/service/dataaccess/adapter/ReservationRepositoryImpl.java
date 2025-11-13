@@ -1,6 +1,8 @@
 package com.github.mehrdadfalahati.reservation.service.dataaccess.adapter;
 
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.ReservationRepository;
+import com.github.mehrdadfalahati.reservation.service.dataaccess.entity.ReservationEntity;
+import com.github.mehrdadfalahati.reservation.service.dataaccess.mapper.ReservationDataMapper;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.repository.ReservationJpaRepository;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.ReservationId;
@@ -15,20 +17,27 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReservationRepositoryImpl implements ReservationRepository {
 
-    private final ReservationJpaRepository repository;
+    private final ReservationJpaRepository reservationJpaRepository;
+    private final ReservationDataMapper reservationDataMapper;
 
     @Override
     public Reservation save(Reservation reservation) {
-        return null;
+        ReservationEntity entity = reservationDataMapper.toEntity(reservation);
+        ReservationEntity savedEntity = reservationJpaRepository.save(entity);
+        return reservationDataMapper.toDomain(savedEntity);
     }
 
     @Override
     public Optional<Reservation> findById(ReservationId id) {
-        return Optional.empty();
+        return reservationJpaRepository.findById(id.value())
+                .map(reservationDataMapper::toDomain);
     }
 
     @Override
     public List<Reservation> findByUserId(UserId userId) {
-        return List.of();
+        return reservationJpaRepository.findByUserId(userId.value())
+                .stream()
+                .map(reservationDataMapper::toDomain)
+                .toList();
     }
 }
