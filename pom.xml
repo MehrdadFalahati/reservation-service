@@ -7,6 +7,39 @@
     <groupId>com.github.mehrdadfalahati</groupId>
     <artifactId>reservation-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>domain</module>
+        <module>application-service</module>
+        <module>dataaccess</module>
+        <module>web</module>
+        <module>container</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.mehrdadfalahati</groupId>
+                <artifactId>domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mehrdadfalahati</groupId>
+                <artifactId>application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mehrdadfalahati</groupId>
+                <artifactId>dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mehrdadfalahati</groupId>
+                <artifactId>web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
