@@ -1,4 +1,4 @@
-package com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out;
+package com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository;
 
 import com.github.mehrdadfalahati.reservation.service.domain.entity.AvailableSlot;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.AvailableSlotId;

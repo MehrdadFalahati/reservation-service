@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.aplication.service;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
 import org.springframework.stereotype.Service;
 

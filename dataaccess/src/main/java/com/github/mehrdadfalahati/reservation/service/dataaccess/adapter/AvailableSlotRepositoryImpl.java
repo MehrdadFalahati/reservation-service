@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.dataaccess.adapter;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.AvailableSlotRepository;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.AvailableSlotRepository;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.entity.AvailableSlotEntity;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.mapper.AvailableSlotDataMapper;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.repository.AvailableSlotJpaRepository;

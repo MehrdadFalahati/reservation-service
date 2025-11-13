@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.dataaccess.adapter;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.ReservationRepository;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.ReservationRepository;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.entity.ReservationEntity;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.mapper.ReservationDataMapper;
 import com.github.mehrdadfalahati.reservation.service.dataaccess.repository.ReservationJpaRepository;
