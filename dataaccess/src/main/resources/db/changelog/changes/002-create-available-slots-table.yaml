@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-available-slots-table
+      author: mehrdad
+      changes:
+        - createTable:
+            tableName: available_slots
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_reserved
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createIndex:
+            indexName: idx_available_slots_start_time
+            tableName: available_slots
+            columns:
+              - column:
+                  name: start_time
+        - createIndex:
+            indexName: idx_available_slots_is_reserved
+            tableName: available_slots
+            columns:
+              - column:
+                  name: is_reserved
+        - createIndex:
+            indexName: idx_available_slots_reservation_query
+            tableName: available_slots
+            columns:
+              - column:
+                  name: is_reserved
+              - column:
+                  name: start_time
+      rollback:
+        - dropTable:
+            tableName: available_slots

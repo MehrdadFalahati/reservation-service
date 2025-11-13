@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-reservations-table
+      author: mehrdad
+      changes:
+        - createTable:
+            tableName: reservations
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(26)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: available_slot_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reserved_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cancelled_at
+                  type: DATETIME
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: BIGINT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: reservations
+            baseColumnNames: user_id
+            constraintName: fk_reservations_user
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: RESTRICT
+        - addForeignKeyConstraint:
+            baseTableName: reservations
+            baseColumnNames: available_slot_id
+            constraintName: fk_reservations_slot
+            referencedTableName: available_slots
+            referencedColumnNames: id
+            onDelete: RESTRICT
+        - createIndex:
+            indexName: idx_reservations_user_id
+            tableName: reservations
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            indexName: idx_reservations_slot_id
+            tableName: reservations
+            columns:
+              - column:
+                  name: available_slot_id
+        - createIndex:
+            indexName: idx_reservations_status
+            tableName: reservations
+            columns:
+              - column:
+                  name: status
+      rollback:
+        - dropTable:
+            tableName: reservations

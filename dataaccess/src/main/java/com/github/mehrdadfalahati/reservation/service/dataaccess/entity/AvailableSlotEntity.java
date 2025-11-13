@@ -18,6 +18,15 @@ public class AvailableSlotEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "start_time", nullable = false)
+    private java.time.Instant startTime;
+
+    @Column(name = "end_time", nullable = false)
+    private java.time.Instant endTime;
+
+    @Column(name = "is_reserved", nullable = false)
+    private Boolean isReserved;
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

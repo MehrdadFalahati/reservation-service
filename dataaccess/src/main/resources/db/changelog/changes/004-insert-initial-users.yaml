@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-insert-initial-users
+      author: mehrdad
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: email
+                  value: johndoe@example.com
+              - column:
+                  name: password
+                  value: hashed_password_123
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user2
+              - column:
+                  name: email
+                  value: janedoe@example.com
+              - column:
+                  name: password
+                  value: hashed_password_456
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user3
+              - column:
+                  name: email
+                  value: user123@example.com
+              - column:
+                  name: password
+                  value: hashed_password_789
+      rollback:
+        - delete:
+            tableName: users
+            where: username IN ('user1', 'user2', 'user3')
