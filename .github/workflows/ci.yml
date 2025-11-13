@@ -29,9 +29,3 @@ jobs:
 
     - name: Check code coverage
       run: mvn verify
-
-    - name: Build Docker image (optional)
-      if: github.ref == 'refs/heads/main'
-      run: |
-        cd container
-        docker build -t reservation-service:${{ github.sha }} .
