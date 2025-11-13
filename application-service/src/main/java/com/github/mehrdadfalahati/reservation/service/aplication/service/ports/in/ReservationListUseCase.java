@@ -1,0 +1,16 @@
+package com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in;
+
+import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
+import com.github.mehrdadfalahati.reservation.service.domain.valueobject.UserId;
+import lombok.Builder;
+
+import java.util.List;
+
+public interface ReservationListUseCase {
+
+    List<Reservation> list(Query query);
+
+    @Builder
+    record Query(UserId userId) {
+    }
+}
