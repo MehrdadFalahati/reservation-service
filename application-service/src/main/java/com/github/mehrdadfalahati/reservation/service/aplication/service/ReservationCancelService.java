@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.aplication.service;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCancelUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.AvailableSlotRepository;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.ReservationRepository;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.AvailableSlot;
@@ -14,14 +14,14 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class ReservationCanselService implements ReservationCanselUseCase {
+public class ReservationCancelService implements ReservationCancelUseCase {
 
     private final ReservationRepository reservationRepository;
     private final AvailableSlotRepository availableSlotRepository;
 
     @Override
     @Transactional
-    public Reservation cansel(Command command) {
+    public Reservation cancel(Command command) {
         Objects.requireNonNull(command, "Command cannot be null");
         ReservationId reservationId = Objects.requireNonNull(command.reservationId(), "ReservationId is required");
 

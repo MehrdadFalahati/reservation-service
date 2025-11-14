@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.aplication.service;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCancelUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.AvailableSlotRepository;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.out.repository.ReservationRepository;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.AvailableSlot;
@@ -22,18 +22,18 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ReservationCanselServiceTest {
+class ReservationCancelServiceTest {
 
     @Mock
     private ReservationRepository reservationRepository;
     @Mock
     private AvailableSlotRepository availableSlotRepository;
 
-    private ReservationCanselService reservationCanselService;
+    private ReservationCancelService reservationCancelService;
 
     @BeforeEach
     void setUp() {
-        reservationCanselService = new ReservationCanselService(reservationRepository, availableSlotRepository);
+        reservationCancelService = new ReservationCancelService(reservationRepository, availableSlotRepository);
     }
 
     @Test
@@ -54,11 +54,11 @@ class ReservationCanselServiceTest {
         when(reservationRepository.save(any(Reservation.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(availableSlotRepository.save(any(AvailableSlot.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        ReservationCanselUseCase.Command command = ReservationCanselUseCase.Command.builder()
+        ReservationCancelUseCase.Command command = ReservationCancelUseCase.Command.builder()
                 .reservationId(reservationId)
                 .build();
 
-        Reservation result = reservationCanselService.cansel(command);
+        Reservation result = reservationCancelService.cancel(command);
 
         assertTrue(result.isCancelled());
         assertFalse(slot.getIsReserved());
@@ -66,13 +66,13 @@ class ReservationCanselServiceTest {
 
     @Test
     void shouldThrowWhenReservationNotFound() {
-        ReservationCanselUseCase.Command command = ReservationCanselUseCase.Command.builder()
+        ReservationCancelUseCase.Command command = ReservationCancelUseCase.Command.builder()
                 .reservationId(new ReservationId("UNKNOWN"))
                 .build();
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> reservationCanselService.cansel(command)
+                () -> reservationCancelService.cancel(command)
         );
 
         assertTrue(exception.getMessage().contains("Reservation"));
@@ -88,13 +88,13 @@ class ReservationCanselServiceTest {
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
         when(availableSlotRepository.findById(slotId)).thenReturn(Optional.empty());
 
-        ReservationCanselUseCase.Command command = ReservationCanselUseCase.Command.builder()
+        ReservationCancelUseCase.Command command = ReservationCancelUseCase.Command.builder()
                 .reservationId(reservationId)
                 .build();
 
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
-                () -> reservationCanselService.cansel(command)
+                () -> reservationCancelService.cancel(command)
         );
 
         assertTrue(exception.getMessage().contains("Available slot"));

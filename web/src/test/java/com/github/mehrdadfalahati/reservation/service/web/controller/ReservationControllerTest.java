@@ -1,7 +1,7 @@
 package com.github.mehrdadfalahati.reservation.service.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCancelUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCreateUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationListUseCase;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
@@ -44,7 +44,7 @@ class ReservationControllerTest {
     private ReservationCreateUseCase reservationCreateUseCase;
 
     @MockitoBean
-    private ReservationCanselUseCase reservationCanselUseCase;
+    private ReservationCancelUseCase reservationCancelUseCase;
 
     @MockitoBean
     private ReservationListUseCase reservationListUseCase;
@@ -69,7 +69,7 @@ class ReservationControllerTest {
     @Test
     void shouldCancelReservation() throws Exception {
         Reservation cancelledReservation = sampleReservation("01HPQRCANCEL0987654321", ReservationStatus.CANCELLED);
-        when(reservationCanselUseCase.cansel(any())).thenReturn(cancelledReservation);
+        when(reservationCancelUseCase.cancel(any())).thenReturn(cancelledReservation);
 
         mockMvc.perform(delete("/api/reservations/{id}", "01HPQRCANCEL0987654321"))
                 .andExpect(status().isOk())

@@ -4,9 +4,9 @@ import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.ReservationId;
 import lombok.Builder;
 
-public interface ReservationCanselUseCase {
+public interface ReservationCancelUseCase {
 
-    Reservation cansel(Command command);
+    Reservation cancel(Command command);
 
     @Builder
     record Command(ReservationId reservationId) {}

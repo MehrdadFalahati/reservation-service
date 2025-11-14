@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.web.controller;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCancelUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCreateUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationListUseCase;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
@@ -28,7 +28,7 @@ import java.util.List;
 public class ReservationController {
 
     private final ReservationCreateUseCase reservationCreateUseCase;
-    private final ReservationCanselUseCase reservationCanselUseCase;
+    private final ReservationCancelUseCase reservationCancelUseCase;
     private final ReservationListUseCase reservationListUseCase;
     private final ReservationApiMapper reservationApiMapper;
 
@@ -43,7 +43,7 @@ public class ReservationController {
 
     @DeleteMapping("/{reservationId}")
     public ReservationResponse cancelReservation(@PathVariable String reservationId) {
-        Reservation reservation = reservationCanselUseCase.cansel(
+        Reservation reservation = reservationCancelUseCase.cancel(
                 reservationApiMapper.toCommand(reservationId)
         );
         return reservationApiMapper.toResponse(reservation);

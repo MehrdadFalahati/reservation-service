@@ -1,6 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.web.mapper;
 
-import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCanselUseCase;
+import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCancelUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationCreateUseCase;
 import com.github.mehrdadfalahati.reservation.service.aplication.service.ports.in.usecase.ReservationListUseCase;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
@@ -27,8 +27,8 @@ public interface ReservationApiMapper {
                 .build();
     }
 
-    default ReservationCanselUseCase.Command toCommand(String reservationId) {
-        return ReservationCanselUseCase.Command.builder()
+    default ReservationCancelUseCase.Command toCommand(String reservationId) {
+        return ReservationCancelUseCase.Command.builder()
                 .reservationId(new ReservationId(reservationId))
                 .build();
     }
