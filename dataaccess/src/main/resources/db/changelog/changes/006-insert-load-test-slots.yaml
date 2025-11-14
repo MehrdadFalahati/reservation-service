@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-insert-load-test-slots
+      author: claude
+      changes:
+        - sql:
+            dbms: h2
+            sql: |
+              INSERT INTO available_slots (start_time, end_time, is_reserved)
+              SELECT
+                DATEADD('HOUR', x, TIMESTAMP '2025-01-01 00:00:00') as start_time,
+                DATEADD('HOUR', x + 1, TIMESTAMP '2025-01-01 00:00:00') as end_time,
+                false as is_reserved
+              FROM SYSTEM_RANGE(0, 999) as T(x);
+        - sql:
+            dbms: postgresql
+            sql: |
+              INSERT INTO available_slots (start_time, end_time, is_reserved)
+              SELECT
+                timestamp '2025-01-01 00:00:00' + (n || ' hours')::interval as start_time,
+                timestamp '2025-01-01 00:00:00' + ((n + 1) || ' hours')::interval as end_time,
+                false as is_reserved
+              FROM generate_series(0, 999) as n;
+      rollback:
+        - sql:
+            sql: DELETE FROM available_slots WHERE start_time >= '2025-01-01 00:00:00';

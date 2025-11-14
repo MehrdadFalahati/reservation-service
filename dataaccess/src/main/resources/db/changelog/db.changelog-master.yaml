@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/changes/004-insert-initial-users.yaml
   - include:
       file: db/changelog/changes/005-insert-initial-available-slots.yaml
+  - include:
+      file: db/changelog/changes/006-insert-load-test-slots.yaml
