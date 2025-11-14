@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EntityScan(basePackages = "com.github.mehrdadfalahati.reservation.service.dataacces")
-@EnableJpaRepositories(basePackages = "com.github.mehrdadfalahati.reservation.service.dataacces")
+@EntityScan(basePackages = "com.github.mehrdadfalahati.reservation.service.dataaccess")
+@EnableJpaRepositories(basePackages = "com.github.mehrdadfalahati.reservation.service.dataaccess")
 @SpringBootApplication(scanBasePackages = "com.github.mehrdadfalahati.reservation.service")
 public class ReservationServiceApplication {
 

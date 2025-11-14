@@ -1,0 +1,54 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 
+          - health
+          - info
+          - prometheus
+spring:
+  application:
+    name: reservation-service
+
+  datasource:
+    url: jdbc:h2:mem:reservation-db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: reservation-pool
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  jackson:
+    default-property-inclusion: non_null
+
+jwt:
+  secret: 2f1c8756aa53fd0df96f0ceac7d7706a5f43c9fe5db18a89e4c1ce1c76a7eb47
+  expiration: 86400000
+
+logging:
+  level:
+    com.github.mehrdadfalahati.reservation.service: INFO
+    org.hibernate.SQL: WARN
+    liquibase: INFO
