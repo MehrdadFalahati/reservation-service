@@ -408,7 +408,7 @@ docker images | grep reservation.service
 **Run Docker Container:**
 ```bash
 docker run -p 8080:8080 \
-  com.github.mehrdadfalahati/reservation.service:1.0.0
+  com.github.mehrdadfalahati/reservation.service:1.0-SNAPSHOT
 ```
 
 #### 3. **GitHub Container Registry (GHCR)**
@@ -418,7 +418,7 @@ The CI/CD pipeline automatically publishes Docker images to GitHub Container Reg
 ```yaml
 # Accessible at:
 ghcr.io/mehrdadfalahati/reservation-service:latest
-ghcr.io/mehrdadfalahati/reservation-service:1.0.0
+ghcr.io/mehrdadfalahati/reservation-service:1.0-SNAPSHOT
 ```
 
 **Pull and Run from GHCR:**
