@@ -52,7 +52,7 @@ jobs:
         IMAGE_NAME="com.github.mehrdadfalahati/reservation.service:1.0-SNAPSHOT"
 
         # Tag for GHCR (convert to lowercase as GHCR requires)
-        GHCR_IMAGE="ghcr.io/${{ github.repository_owner }}/reservation-service"
+        GHCR_IMAGE=$(echo "ghcr.io/${{ github.repository_owner }}/reservation-service" | tr '[:upper:]' '[:lower:]')
 
         docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:latest
         docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:1.0-SNAPSHOT
