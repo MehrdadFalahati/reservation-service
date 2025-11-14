@@ -135,7 +135,7 @@ class AvailableSlotRepositoryImplTest {
     @Test
     void shouldReturnEmptyWhenSlotNotFound() {
         // When
-        Optional<AvailableSlot> result = availableSlotRepository.findById(new AvailableSlotId(999L));
+        Optional<AvailableSlot> result = availableSlotRepository.findById(new AvailableSlotId(999111L));
 
         // Then
         assertFalse(result.isPresent());
