@@ -7,6 +7,7 @@ import com.github.mehrdadfalahati.reservation.service.domain.entity.Reservation;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.AvailableSlotId;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.ReservationId;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.UserId;
+import com.github.mehrdadfalahati.reservation.service.security.util.SecurityContextUtil;
 import com.github.mehrdadfalahati.reservation.service.web.dto.request.ReservationCreateRequest;
 import com.github.mehrdadfalahati.reservation.service.web.dto.response.ReservationResponse;
 import org.mapstruct.Mapper;
@@ -22,7 +23,7 @@ public interface ReservationApiMapper {
 
     default ReservationCreateUseCase.Command toCommand(ReservationCreateRequest request) {
         return ReservationCreateUseCase.Command.builder()
-                .userId(new UserId(request.userId()))
+                .userId(new UserId(SecurityContextUtil.getId()))
                 .requestedTime(request.requestedTime())
                 .build();
     }

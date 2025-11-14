@@ -5,6 +5,7 @@ import com.github.mehrdadfalahati.reservation.service.dataaccess.mapper.UserData
 import com.github.mehrdadfalahati.reservation.service.dataaccess.repository.UserJpaRepository;
 import com.github.mehrdadfalahati.reservation.service.domain.entity.User;
 import com.github.mehrdadfalahati.reservation.service.domain.valueobject.UserId;
+import com.github.mehrdadfalahati.reservation.service.domain.valueobject.Username;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(UserId id) {
         return userJpaRepository.findById(id.value())
+                .map(userDataMapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByUsername(Username username) {
+        return userJpaRepository.findByUsername(username.value())
                 .map(userDataMapper::toDomain);
     }
 }
