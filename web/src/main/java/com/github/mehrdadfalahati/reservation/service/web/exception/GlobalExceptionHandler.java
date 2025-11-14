@@ -1,5 +1,6 @@
 package com.github.mehrdadfalahati.reservation.service.web.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -13,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.time.Instant;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -44,6 +46,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, WebRequest request) {
+        log.error("Unexpected error occurred while processing request {}", extractPath(request), ex);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error occurred", request);
     }
 

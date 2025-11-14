@@ -97,6 +97,13 @@ class ReservationSystemIntegrationTest {
         }
     }
 
+    @Test
+    void shouldExposeOpenApiDocuments() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/v3/api-docs", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).contains("\"openapi\"");
+    }
+
     private ResponseEntity<ReservationResponse> performCreate(String token, CountDownLatch startGate) throws InterruptedException {
         startGate.await();
         HttpEntity<ReservationCreateRequest> entity = authorizedEntity(
