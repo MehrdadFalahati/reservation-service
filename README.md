@@ -408,7 +408,7 @@ docker images | grep reservation.service
 **Run Docker Container:**
 ```bash
 docker run -p 8080:8080 \
-  com.github.mehrdadfalahati/reservation.service:1.0-SNAPSHOT
+  com.github.mehrdadfalahati/reservation.service:1.0.0
 ```
 
 #### 3. **GitHub Container Registry (GHCR)**
@@ -418,7 +418,7 @@ The CI/CD pipeline automatically publishes Docker images to GitHub Container Reg
 ```yaml
 # Accessible at:
 ghcr.io/mehrdadfalahati/reservation-service:latest
-ghcr.io/mehrdadfalahati/reservation-service:1.0-SNAPSHOT
+ghcr.io/mehrdadfalahati/reservation-service:1.0.0
 ```
 
 **Pull and Run from GHCR:**
@@ -582,26 +582,3 @@ Tunable JVM properties:
 - `loadtest.rampSeconds` / `loadtest.holdSeconds` – duration for each phase
 - `loadtest.iterations` – how many reservation cycles each virtual user performs
 - `loadtest.slaMs` – SLA threshold enforced via Gatling assertions
-
-## Next Steps
-
-**Production Readiness:**
-- Replace the in-memory H2 datasource with PostgreSQL for production deployment
-- Configure external configuration management (Spring Cloud Config, Kubernetes ConfigMaps)
-- Implement distributed tracing (OpenTelemetry, Jaeger)
-- Add metrics and monitoring (Prometheus, Grafana)
-
-**Security Enhancements:**
-- Expand the legacy password migration strategy by re-encoding passwords on successful login
-- Implement refresh token rotation for long-lived sessions
-- Add rate limiting to prevent brute-force attacks
-
-**Performance Optimization:**
-- Run load tests at scale to validate <100ms SLA with 1M+ records
-- Implement database read replicas for horizontal scaling
-- Add Redis caching for frequently accessed data (user sessions, available slots)
-
-**Feature Enhancements:**
-- Add reservation expiration scheduler to auto-cancel abandoned reservations
-- Implement notification system (email, SMS) for reservation confirmations
-- Add pagination and filtering to reservation list endpoints

@@ -49,16 +49,16 @@ jobs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         # Get the image name from the build
-        IMAGE_NAME="com.github.mehrdadfalahati/reservation.service:1.0-SNAPSHOT"
+        IMAGE_NAME="com.github.mehrdadfalahati/reservation.service:1.0.0"
 
         # Tag for GHCR (convert to lowercase as GHCR requires)
         GHCR_IMAGE="ghcr.io/${{ github.repository_owner }}/reservation-service"
 
         docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:latest
-        docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:1.0-SNAPSHOT
+        docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:1.0.0
         docker tag ${IMAGE_NAME} ${GHCR_IMAGE}:${{ github.sha }}
 
         # Push all tags
         docker push ${GHCR_IMAGE}:latest
-        docker push ${GHCR_IMAGE}:1.0-SNAPSHOT
+        docker push ${GHCR_IMAGE}:1.0.0
         docker push ${GHCR_IMAGE}:${{ github.sha }}
